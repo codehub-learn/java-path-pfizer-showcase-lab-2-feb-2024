@@ -58,4 +58,15 @@ public class Student extends BaseModel {
     public void setEnrollments(List<Enrollment> enrollments) {
         this.enrollments = enrollments;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", enrollments=" + enrollments +
+                '}';
+    }
 }
