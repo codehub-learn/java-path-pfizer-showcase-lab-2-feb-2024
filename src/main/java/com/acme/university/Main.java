@@ -21,9 +21,10 @@ public class Main {
 
         Parser csvFileParser = new CsvFileParser();
         List<String> studentsListStr = csvFileParser.load(filePath + "students.csv");
-        studentsListStr.forEach((student) -> log.info(student));
+        studentsListStr.forEach((studentStr) -> log.info(studentStr));
 
         StudentFactory studentFactory = new StudentFactory();
         List<Student> studentsList = studentFactory.produce(studentsListStr);
+        studentsList.forEach((student) -> log.info("{}", student));
     }
 }
