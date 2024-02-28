@@ -27,4 +27,12 @@ public class Unit extends BaseModel {
     public void setTutorName(String tutorName) {
         this.tutorName = tutorName;
     }
+
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "name='" + name + '\'' +
+                ", tutorName='" + tutorName + '\'' +
+                '}';
+    }
 }

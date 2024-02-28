@@ -25,4 +25,12 @@ public class Enrollment extends BaseModel {
     public void setGrade(int grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "Enrollment{" +
+                "unit=" + unit +
+                ", grade=" + grade +
+                '}';
+    }
 }

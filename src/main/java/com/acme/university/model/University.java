@@ -27,4 +27,12 @@ public class University extends BaseModel {
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
     }
+
+    @Override
+    public String toString() {
+        return "University{" +
+                "name='" + name + '\'' +
+                ", departments=" + departments +
+                '}';
+    }
 }
