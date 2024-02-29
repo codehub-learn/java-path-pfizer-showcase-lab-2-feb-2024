@@ -4,11 +4,14 @@ import com.acme.university.factory.StudentFactory;
 import com.acme.university.factory.UniversityFactory;
 import com.acme.university.model.Student;
 import com.acme.university.model.University;
+import com.acme.university.repository.DataSource;
 import com.acme.university.util.parser.CsvFileParser;
 import com.acme.university.util.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 
 public class Main {
@@ -60,6 +63,32 @@ public class Main {
         studentFactory.procudeEnrollments(students, universities, enrollmentsCsv);
         for (Student student : students) {
             log.info("{}", student);
+        }
+
+        try {
+            Connection connection = DataSource.getConnection();
+            final String databaseVersion = connection.getMetaData().getDatabaseProductVersion();
+            log.info("Database Version: {}", databaseVersion);
+
+            initializeDatabaseTables();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        //...
+    }
+
+    private static void initializeDatabaseTables() {
+        try(Connection connection = DataSource.getConnection();
+            Statement statement = connection.createStatement()){
+            statement.execute("CREATE TABLE STUDENT (" +
+                    "  id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
+                    "  name VARCHAR2(100) NOT NULL, " +
+                    "  address VARCHAR2(100) NOT NULL, " +
+                    "  dateOfBirth DATE NOT NULL " +
+                    "  )");
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
     }
 }
